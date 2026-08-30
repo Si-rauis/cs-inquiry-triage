@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: cs-inquiry-triage
+  datasource:
+    url: jdbc:mysql://localhost:3306/cs_inquiry_triage
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+
+claude:
+  base-url: https://api.anthropic.com
+  api-key: ${CLAUDE_API_KEY:}
+  model: claude-sonnet-5
+
+slack:
+  webhook-url: ${SLACK_WEBHOOK_URL:}
+
+triage:
+  auto-send-confidence-threshold: 0.85
