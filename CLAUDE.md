@@ -82,3 +82,4 @@ global/
 
 ## 주의사항
 - API 키는 절대 커밋하지 말 것 (.env 또는 application-local.yml로 관리, .gitignore 추가)
+- 한국어로 답변해줘

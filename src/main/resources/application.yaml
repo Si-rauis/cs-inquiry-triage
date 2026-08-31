@@ -1,10 +1,12 @@
 spring:
   application:
     name: cs-inquiry-triage
+  profiles:
+    active: local
   datasource:
     url: jdbc:mysql://localhost:3306/cs_inquiry_triage
     username: ${DB_USERNAME:root}
-    password: ${DB_PASSWORD:}
+    password: ${DB_PASSWORD}
   jpa:
     hibernate:
       ddl-auto: update
