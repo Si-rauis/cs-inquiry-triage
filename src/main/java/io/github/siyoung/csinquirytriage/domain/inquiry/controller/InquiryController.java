@@ -7,6 +7,7 @@ import io.github.siyoung.csinquirytriage.domain.inquiry.entity.Inquiry;
 import io.github.siyoung.csinquirytriage.domain.inquiry.entity.InquiryStatus;
 import io.github.siyoung.csinquirytriage.domain.inquiry.service.InquiryTriageService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,14 +21,11 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping(ApiPathConstants.INQUIRIES)
 public class InquiryController {
 
     private final InquiryTriageService inquiryTriageService;
-
-    public InquiryController(InquiryTriageService inquiryTriageService) {
-        this.inquiryTriageService = inquiryTriageService;
-    }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
