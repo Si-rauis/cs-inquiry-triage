@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class InquiryTriageService {
@@ -35,10 +36,15 @@ public class InquiryTriageService {
     public Inquiry triage(String content) {
         Inquiry inquiry = new Inquiry(content);
 
-        ClassificationResult result = claudeClient.classify(content);
-        inquiry.applyClassification(result.category(), result.confidence(), result.draftAnswer());
+        Optional<ClassificationResult> result = claudeClient.classify(content);
 
-        boolean autoSend = shouldAutoSend(result);
+        boolean autoSend = false;
+        if (result.isPresent()) {
+            ClassificationResult classification = result.get();
+            inquiry.applyClassification(classification.category(), classification.confidence(), classification.draftAnswer());
+            autoSend = shouldAutoSend(classification);
+        }
+
         if (autoSend) {
             inquiry.markAutoSent();
         } else {
